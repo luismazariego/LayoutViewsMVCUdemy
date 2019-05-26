@@ -1,8 +1,24 @@
 ﻿
 @{
     ViewBag.Title = "About";
-    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+    //Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
 <h2>About Page content here</h2>
 
+@{
+    ViewBag.Message = "Leading Company in the world";
+}
+
+@{
+    ViewBag.ListTitle = "Products";
+    ViewBag.Items = new List<string>() {"Mobiles", "Electronics", "Home Appliances"};
+    Html.RenderPartial("ListPartialView");
+}
+
+@section SideBarOptions
+{
+    <a href="#" class="list-group-item text-white" style="background-color: transparent">About Company</a>
+    <a href="#" class="list-group-item text-white" style="background-color: transparent">About Founders</a>
+    <a href="#" class="list-group-item text-white" style="background-color: transparent">About Team</a>
+}
