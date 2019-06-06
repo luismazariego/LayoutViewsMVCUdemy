@@ -43,5 +43,16 @@ namespace ModelExample.Controllers
 
             return View(matchingProduct);
         }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create([Bind(Include = "ProductId, ProductName")] Product product)
+        {
+            return View();
+        }
     }
 }

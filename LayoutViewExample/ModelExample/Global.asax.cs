@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using ModelExample.Models;
 
 namespace ModelExample
 {
@@ -13,6 +14,7 @@ namespace ModelExample
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            ModelBinders.Binders.Add(typeof(Student), new CustomBinder());
         }
     }
 }
