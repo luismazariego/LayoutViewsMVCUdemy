@@ -6,6 +6,11 @@
 }
 
 <h2>Products</h2>
+<form class="form-inline" action="/products/index">
+    <label for="search" class="mr-1">Search</label>
+    <input type="search" id="search" class="form-control mr-1" name="search" placeholder="Search" value="@ViewBag.Search"/>
+    <button type="submit" class="btn btn-primary">GO</button>
+</form>
 <table class="table">
     <tr>
         <th>Product Id</th>
@@ -38,6 +43,9 @@
             <td>@item.CategoryID</td>
             <td>@item.BrandID</td>
             <td>@item.Active</td>
+            <td>
+                <a href="/products/details/@item.ProductID">Details</a>
+            </td>
         </tr>
     }
 </table>
