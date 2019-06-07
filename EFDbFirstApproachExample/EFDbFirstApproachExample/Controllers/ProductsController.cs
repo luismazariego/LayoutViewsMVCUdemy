@@ -40,5 +40,78 @@ namespace EFDbFirstApproachExample.Controllers
 
             return View(product);
         }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Product product)
+        {
+            var db = new EFDBFirstDatabaseEntities();
+
+            db.Products.Add(product);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(long id)
+        {
+            var db = new EFDBFirstDatabaseEntities();
+
+            //as showed in the course
+            var existingProduct = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
+
+            //More short way
+            //var existingProduct = db.Products.FirstOrDefault(temp => temp.ProductID == id);
+
+            return View(existingProduct);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Product product)
+        {
+            var db = new EFDBFirstDatabaseEntities();
+
+            var existingProduct = db.Products.Where(temp => temp.ProductID == product.ProductID).FirstOrDefault();
+
+            existingProduct.ProductName = product.ProductName;
+            existingProduct.Price = product.Price;
+            existingProduct.DateOfPurchase = product.DateOfPurchase;
+            existingProduct.AvailabilityStatus = product.AvailabilityStatus;
+            existingProduct.BrandID = product.BrandID;
+            existingProduct.CategoryID = product.CategoryID;
+            existingProduct.Active = product.Active;
+            
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(long id)
+        {
+            var db = new EFDBFirstDatabaseEntities();
+
+            var existingProduct = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
+
+            return View(existingProduct);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(long id, Product p)
+        {
+            var db = new EFDBFirstDatabaseEntities();
+
+            var existingProduct = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
+
+            db.Products.Remove(existingProduct);
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Products");
+        }
+
+
     }
 }

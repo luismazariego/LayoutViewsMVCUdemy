@@ -6,6 +6,8 @@
 }
 
 <h2>Products</h2>
+
+<a href="/products/create">Create</a>
 <form class="form-inline" action="/products/index">
     <label for="search" class="mr-1">Search</label>
     <input type="search" id="search" class="form-control mr-1" name="search" placeholder="Search" value="@ViewBag.Search"/>
@@ -45,6 +47,8 @@
             <td>@item.Active</td>
             <td>
                 <a href="/products/details/@item.ProductID">Details</a>
+                <a href="/products/edit/@item.ProductID">Edit</a>
+                <a href="/products/delete/@item.ProductID">Delete</a>
             </td>
         </tr>
     }
