@@ -4,23 +4,30 @@
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<h2>Delete</h2>
+<h2>Delete Product</h2>
 
 <form action="/products/delete/@Model.ProductID" method="post">
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="ProductName">Product Name</label>
-            <input type="hidden" name="ProductID" value="@Model.ProductID" />
-            @*<input type="text" class="form-control" id="ProductName" placeholder="Product Name" name="ProductName" value="@Model.ProductName" />*@
-            @Model.ProductName
-        </div>
-        <div class="form-group col-md-6">
-            <label for="Price">Price</label>
-            @*<input type="text" class="form-control" id="Price" placeholder="Price" name="Price" value="@Model.Price" />*@
-            @Model.Price
-        </div>
-    </div>
-
+    <table class="table">
+        <tr>
+            <td>
+                <label for="ProductName">Product Name</label>
+            </td>
+            <td>
+                <input type="hidden" name="ProductID" value="@Model.ProductID" />
+                @Model.ProductName
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="Price">Price</label>
+            </td>
+            <td>
+                @Model.Price
+            </td>
+        </tr>
+    </table>
+    
+    <div>Are you sure to delete this product?</div>
     <button type="submit" class="btn btn-danger">Delete</button>
     <a href="/products/index" class="btn btn-danger">Cancel</a>
 </form>

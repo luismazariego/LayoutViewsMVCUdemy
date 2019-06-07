@@ -26,18 +26,90 @@
         </div>
         <div class="form-group col-md-6">
             <label for="AvailabilityStatus">Availability Status</label>
-            <input type="text" class="form-control" id="AvailabilityStatus" placeholder="Availability Status" name="AvailabilityStatus" value="@Model.AvailabilityStatus"/>
+            <select class="form-control" id="AvailabilityStatus" placeholder="Availability Status" name="AvailabilityStatus">
+                <option value="">Please Select</option>
+                @if (Request.Browser.Type.Contains("Chrome"))
+                {
+                    if (@Model.AvailabilityStatus == "InStock")
+                    {
+                        <option value="InStock" selected="selected">In Stock</option>
+                        <option value="OutOfStock">Out Of Stock</option>
+                    }
+                    else
+                    {
+                        <option value="InStock">In Stock</option>
+                        <option value="OutOfStock" selected="selected">Out Of Stock</option>
+                    }
+
+                }
+                else
+                {
+                    if (@Model.AvailabilityStatus == "InStock")
+                    {
+                        <option value="InStock" selected>In Stock</option>
+                        <option value="OutOfStock">Out Of Stock</option>
+                    }
+                    else
+                    {
+                        <option value="InStock">In Stock</option>
+                        <option value="OutOfStock" selected>Out Of Stock</option>
+                    }
+                }
+
+            </select>
         </div>
     </div>
 
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="CategoryID">Category ID</label>
-            <input type="text" class="form-control" id="CategoryID" placeholder="Category ID" name="CategoryID" value="@Model.CategoryID"/>
+            <select class="form-control" id="CategoryID" name="CategoryID">
+                <option value="">Please Select</option>
+                @foreach (var cat in @ViewBag.Categories)
+                {
+                    if (cat.CategoryID == Model.CategoryID)
+                    {
+                        if (Request.Browser.Type.Contains("Chrome"))
+                        {
+                            <option value="@cat.CategoryID" selected="selected">@cat.CategoryName</option>
+                        }
+                        else
+                        {
+                            <option value="@cat.CategoryID" selected>@cat.CategoryName</option>
+                        }
+                    }
+                    else
+                    {
+                        <option value="@cat.CategoryID">@cat.CategoryName</option>
+                    }
+                }
+            </select>
         </div>
         <div class="form-group col-md-6">
             <label for="BrandID">Brand ID</label>
-            <input type="text" class="form-control" id="BrandID" placeholder="Brand ID" name="BrandID" value="@Model.BrandID"/>
+            <select class="form-control" id="BrandID" name="BrandID">
+                <option value="">Please Select</option>
+                @foreach (var brand in @ViewBag.Brands)
+                {
+                    if (brand.BrandID == Model.BrandID)
+                    {
+                        if (Request.Browser.Type.Contains("Chrome"))
+                        {
+                            <option value="@brand.BrandID" selected="selected">@brand.BrandName</option>
+                        }
+                        else
+                        {
+                            <option value="@brand.BrandID" selected>@brand.BrandName</option>
+                        }
+
+                    }
+                    else
+                    {
+                        <option value="@brand.BrandID">@brand.BrandName</option>
+                    }
+
+                }
+            </select>
         </div>
     </div>
 

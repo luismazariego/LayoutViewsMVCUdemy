@@ -10,7 +10,7 @@ namespace EFDbFirstApproachExample.Controllers
     public class ProductsController : Controller
     {
         // GET: Products
-        public ActionResult Index(string search = "")
+        public ActionResult Index(string search = "", string SortColumn = "ProductName", string IconClass="fa-sort-asc")
         {
             var db = new EFDBFirstDatabaseEntities();
 
@@ -24,6 +24,52 @@ namespace EFDbFirstApproachExample.Controllers
 
             //to show the search term after it is submitted.
             ViewBag.Search = search;
+
+            //Sorting
+            ViewBag.SortColumn = SortColumn;
+            ViewBag.IconClass = IconClass;
+
+            if (ViewBag.SortColumn == "ProductID")
+            {
+                products = ViewBag.IconClass == "fa-sort-asc" 
+                    ? products.OrderBy(temp => temp.ProductID).ToList() 
+                    : products.OrderByDescending(temp => temp.ProductID).ToList();
+            }
+
+            else if (ViewBag.SortColumn == "ProductName")
+            {
+                products = ViewBag.IconClass == "fa-sort-asc" 
+                    ? products.OrderBy(temp => temp.ProductName).ToList() 
+                    : products.OrderByDescending(temp => temp.ProductName).ToList();
+            }
+
+            else if (ViewBag.SortColumn == "Price")
+            {
+                products = ViewBag.IconClass == "fa-sort-asc" 
+                    ? products.OrderBy(temp => temp.Price).ToList() 
+                    : products.OrderByDescending(temp => temp.Price).ToList();
+            }
+
+            else if (ViewBag.SortColumn == "AvailabilityStatus")
+            {
+                products = ViewBag.IconClass == "fa-sort-asc"
+                    ? products.OrderBy(temp => temp.AvailabilityStatus).ToList()
+                    : products.OrderByDescending(temp => temp.AvailabilityStatus).ToList();
+            }
+
+            else if (ViewBag.SortColumn == "CategoryID")
+            {
+                products = ViewBag.IconClass == "fa-sort-asc"
+                    ? products.OrderBy(temp => temp.CategoryID).ToList()
+                    : products.OrderByDescending(temp => temp.CategoryID).ToList();
+            }
+
+            else if (ViewBag.SortColumn == "BrandID")
+            {
+                products = ViewBag.IconClass == "fa-sort-asc"
+                    ? products.OrderBy(temp => temp.BrandID).ToList()
+                    : products.OrderByDescending(temp => temp.BrandID).ToList();
+            }
 
             return View(products);
         }
@@ -43,6 +89,9 @@ namespace EFDbFirstApproachExample.Controllers
 
         public ActionResult Create()
         {
+            var db = new EFDBFirstDatabaseEntities();
+            ViewBag.Categories = db.Categories.ToList();
+            ViewBag.Brands = db.Brands.ToList();
             return View();
         }
 
@@ -66,6 +115,9 @@ namespace EFDbFirstApproachExample.Controllers
 
             //More short way
             //var existingProduct = db.Products.FirstOrDefault(temp => temp.ProductID == id);
+
+            ViewBag.Categories = db.Categories.ToList();
+            ViewBag.Brands = db.Brands.ToList();
 
             return View(existingProduct);
         }
