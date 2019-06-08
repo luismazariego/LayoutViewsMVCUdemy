@@ -6,7 +6,7 @@
 }
 
 <h2>Create Product</h2>
-<form action="/products/create" method="post">
+<form action="/products/create" method="post" enctype="multipart/form-data">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="ProductName">Product Name</label>
@@ -54,6 +54,11 @@
                 }
             </select>
         </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="Image">Image</label>
+        <input type="file" class="form-control-file" name="Photo" id="Image"/>
     </div>
     
     <div class="form-group">

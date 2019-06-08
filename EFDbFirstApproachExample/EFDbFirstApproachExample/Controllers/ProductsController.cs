@@ -10,7 +10,7 @@ namespace EFDbFirstApproachExample.Controllers
     public class ProductsController : Controller
     {
         // GET: Products
-        public ActionResult Index(string search = "", string SortColumn = "ProductName", string IconClass="fa-sort-asc")
+        public ActionResult Index(string search = "", string SortColumn = "ProductName", string IconClass="fa-sort-asc", int PageNo = 1)
         {
             var db = new EFDBFirstDatabaseEntities();
 
@@ -71,6 +71,14 @@ namespace EFDbFirstApproachExample.Controllers
                     : products.OrderByDescending(temp => temp.BrandID).ToList();
             }
 
+            //Paging
+            int NoOfRecordsPerPage = 5;
+            int NoOfPages = Convert.ToInt16(Math.Ceiling(Convert.ToDouble(products.Count) / Convert.ToDouble(NoOfRecordsPerPage)));
+            int NoOfRecordsToSkip = (PageNo - 1) * NoOfRecordsPerPage;
+            ViewBag.PageNo = PageNo;
+            ViewBag.NoOfPages = NoOfPages;
+            products = products.Skip(NoOfRecordsToSkip).Take(NoOfRecordsPerPage).ToList();
+
             return View(products);
         }
 
@@ -99,6 +107,17 @@ namespace EFDbFirstApproachExample.Controllers
         public ActionResult Create(Product product)
         {
             var db = new EFDBFirstDatabaseEntities();
+
+            if (Request.Files.Count >= 1)
+            {
+                var file = Request.Files[0];
+                //doesn't work
+                //var imgBytes = new Byte[file.ContentLength - 1];
+                var imgBytes = new Byte[file.ContentLength];
+                file.InputStream.Read(imgBytes, 0, file.ContentLength);
+                var base64String = Convert.ToBase64String(imgBytes, 0, imgBytes.Length);
+                product.Photo = base64String;
+            }
 
             db.Products.Add(product);
             db.SaveChanges();
