@@ -12,7 +12,12 @@ namespace EFDbFirstApproachExample.Controllers
         // GET: Brands
         public ActionResult Index()
         {
-            var db = new EFDBFirstDatabaseEntities();
+            //version of db first approach
+            //var db = new EFDBFirstDatabaseEntities();
+
+            //version of code first approach
+            var db = new CompanyDbContext();
+
             var brands = db.Brands.ToList();
 
             return View(brands);

@@ -9,10 +9,12 @@ namespace EFDbFirstApproachExample.Controllers
 {
     public class ProductsController : Controller
     {
+        readonly CompanyDbContext db = new CompanyDbContext();
+
         // GET: Products
         public ActionResult Index(string search = "", string SortColumn = "ProductName", string IconClass="fa-sort-asc", int PageNo = 1)
         {
-            var db = new EFDBFirstDatabaseEntities();
+            //var db = new EFDBFirstDatabaseEntities();
 
             //Conditional retrieve of items using Where method from linq.
             //temp is a optional name related to the model, in this case the model is the same as the dataset
@@ -84,7 +86,7 @@ namespace EFDbFirstApproachExample.Controllers
 
         public ActionResult Details(long id)
         {
-            var db = new EFDBFirstDatabaseEntities();
+            //var db = new EFDBFirstDatabaseEntities();
 
             //this is the way showed by the instructor.
             var product = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
@@ -97,7 +99,7 @@ namespace EFDbFirstApproachExample.Controllers
 
         public ActionResult Create()
         {
-            var db = new EFDBFirstDatabaseEntities();
+            //var db = new EFDBFirstDatabaseEntities();
             ViewBag.Categories = db.Categories.ToList();
             ViewBag.Brands = db.Brands.ToList();
             return View();
@@ -106,7 +108,7 @@ namespace EFDbFirstApproachExample.Controllers
         [HttpPost]
         public ActionResult Create(Product product)
         {
-            var db = new EFDBFirstDatabaseEntities();
+            //var db = new EFDBFirstDatabaseEntities();
 
             if (Request.Files.Count >= 1)
             {
@@ -127,7 +129,7 @@ namespace EFDbFirstApproachExample.Controllers
 
         public ActionResult Edit(long id)
         {
-            var db = new EFDBFirstDatabaseEntities();
+            //var db = new EFDBFirstDatabaseEntities();
 
             //as showed in the course
             var existingProduct = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
@@ -144,7 +146,7 @@ namespace EFDbFirstApproachExample.Controllers
         [HttpPost]
         public ActionResult Edit(Product product)
         {
-            var db = new EFDBFirstDatabaseEntities();
+            //var db = new EFDBFirstDatabaseEntities();
 
             var existingProduct = db.Products.Where(temp => temp.ProductID == product.ProductID).FirstOrDefault();
 
@@ -163,7 +165,7 @@ namespace EFDbFirstApproachExample.Controllers
 
         public ActionResult Delete(long id)
         {
-            var db = new EFDBFirstDatabaseEntities();
+            //var db = new EFDBFirstDatabaseEntities();
 
             var existingProduct = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
 
@@ -173,7 +175,7 @@ namespace EFDbFirstApproachExample.Controllers
         [HttpPost]
         public ActionResult Delete(long id, Product p)
         {
-            var db = new EFDBFirstDatabaseEntities();
+            //var db = new EFDBFirstDatabaseEntities();
 
             var existingProduct = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
 

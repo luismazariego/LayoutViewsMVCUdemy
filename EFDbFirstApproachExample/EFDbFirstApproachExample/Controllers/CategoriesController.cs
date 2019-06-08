@@ -14,8 +14,8 @@ namespace EFDbFirstApproachExample.Controllers
         {
             //obtiene todos los dataset
             //Gets all dataset (tables in db)
-            var db = new EFDBFirstDatabaseEntities();
-            
+            //var db = new EFDBFirstDatabaseEntities();
+            var db = new CompanyDbContext();
             //linq para obtener el listado de categorias desde la bd.
             //ToList is a Linq method, it gets the list of categories in the dataset (or database table)
             var categories = db.Categories.ToList();
