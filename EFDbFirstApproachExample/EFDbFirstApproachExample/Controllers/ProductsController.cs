@@ -152,7 +152,7 @@ namespace EFDbFirstApproachExample.Controllers
 
             existingProduct.ProductName = product.ProductName;
             existingProduct.Price = product.Price;
-            existingProduct.DateOfPurchase = product.DateOfPurchase;
+            existingProduct.DOP = product.DOP;
             existingProduct.AvailabilityStatus = product.AvailabilityStatus;
             existingProduct.BrandID = product.BrandID;
             existingProduct.CategoryID = product.CategoryID;

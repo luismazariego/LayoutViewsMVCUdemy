@@ -28,9 +28,9 @@
         <th>Date of Purchase</th>
         <td>
             @{
-                System.Diagnostics.Debug.Assert(Model.DateOfPurchase != null, "Model.DateOfPurchase != null");
+                System.Diagnostics.Debug.Assert(Model.DOP != null, "Model.DateOfPurchase != null");
             }
-            @Model.DateOfPurchase.Value.ToString("dd/mm/yyyy")
+            @Model.DOP.Value.ToString("dd/mm/yyyy")
         </td>
     </tr>
     <tr>
