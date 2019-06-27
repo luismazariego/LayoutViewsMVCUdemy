@@ -8,7 +8,17 @@
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="~/Scripts/umd/popper.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <title>@ViewBag.Title</title>
+    <style>
+        .field-validation-error {
+            color: red;
+        }
+        .validation-summary-errors {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 
@@ -29,6 +39,14 @@
                     <a class="nav-link" href="/products/index">Products</a>
                 </li>
             </ul>
+            
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="text-white">
+                    Welcome to, @User.Identity.Name
+                </div>
+            }
+            
         </div>
         <div class="col-3 text-white">
             @ViewBag.Message

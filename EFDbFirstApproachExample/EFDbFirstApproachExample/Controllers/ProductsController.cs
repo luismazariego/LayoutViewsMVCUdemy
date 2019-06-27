@@ -106,9 +106,16 @@ namespace EFDbFirstApproachExample.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create([Bind(Include = "ProductID, ProductName, Price, DOP, AvailabilityStatus, CategoryID, BrandID, Active, Photo")]Product product)
         {
             //var db = new EFDBFirstDatabaseEntities();
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Categories = db.Categories.ToList();
+                ViewBag.Brands = db.Brands.ToList();
+                return View();
+            }
 
             if (Request.Files.Count >= 1)
             {
@@ -120,11 +127,13 @@ namespace EFDbFirstApproachExample.Controllers
                 var base64String = Convert.ToBase64String(imgBytes, 0, imgBytes.Length);
                 product.Photo = base64String;
             }
+            
 
             db.Products.Add(product);
             db.SaveChanges();
 
             return RedirectToAction("Index");
+
         }
 
         public ActionResult Edit(long id)
