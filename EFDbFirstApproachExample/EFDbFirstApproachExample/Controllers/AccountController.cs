@@ -96,5 +96,15 @@ namespace EFDbFirstApproachExample.Controllers
             authenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
+
+        //GET: Account/MyProfile
+        public ActionResult MyProfile()
+        {
+            var appDbContext = new ApplicationDbContext();
+            var userStore = new ApplicationUserStore(appDbContext);
+            var userManager = new ApplicationUserManager(userStore);
+            var appUser = userManager.FindById(User.Identity.GetUserId());
+            return View(appUser);
+        }
     }
 }

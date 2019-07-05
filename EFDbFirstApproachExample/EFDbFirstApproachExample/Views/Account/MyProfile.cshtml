@@ -1,0 +1,36 @@
+﻿@model EFDbFirstApproachExample.Identity.ApplicationUser
+
+@{
+    ViewBag.Title = "MyProfile";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>MyProfile</h2>
+<table class="table-bordered">
+    <tr>
+        <th>Username</th>
+        <td>@Model.UserName</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>@Model.Email</td>
+    </tr>
+    <tr>
+        <th>Mobile</th>
+        <td>@Model.PhoneNumber</td>
+    </tr>
+    <tr>
+        <th>Date of Birth</th>
+        <th>@Model.Birthday</th>
+    </tr>
+    <tr>
+        <th>City</th>
+        <th>@Model.City</th>
+    </tr>
+    <tr>
+        <th>Country</th>
+        <th>@Model.Country</th>
+    </tr>
+</table>
+
+<a href="/home/index">Back</a>

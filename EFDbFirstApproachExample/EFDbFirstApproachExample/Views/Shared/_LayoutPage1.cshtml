@@ -47,9 +47,12 @@
                         <a class="nav-link" href="/account/login">Login</a>
                     </li>
                 }
-                
+
                 @if (User.Identity.IsAuthenticated)
                 {
+                    <li class="nav-item">
+                        <a class="nav-link" href="/account/MyProfile">My Profile</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/account/logout">Logout</a>
                     </li>
