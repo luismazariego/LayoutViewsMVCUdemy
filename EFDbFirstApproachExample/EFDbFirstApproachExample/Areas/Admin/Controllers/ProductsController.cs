@@ -1,18 +1,18 @@
-﻿using System;
+﻿using EFDbFirstApproachExample.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using EFDbFirstApproachExample.Models;
 
-namespace EFDbFirstApproachExample.Controllers
+namespace EFDbFirstApproachExample.Areas.Admin.Controllers
 {
     public class ProductsController : Controller
     {
         readonly CompanyDbContext db = new CompanyDbContext();
 
-        // GET: Products
-        public ActionResult Index(string search = "", string SortColumn = "ProductName", string IconClass="fa-sort-asc", int PageNo = 1)
+        // GET: Admin/Products
+        public ActionResult Index(string search = "", string SortColumn = "ProductName", string IconClass = "fa-sort-asc", int PageNo = 1)
         {
             //var db = new EFDBFirstDatabaseEntities();
 
@@ -33,22 +33,22 @@ namespace EFDbFirstApproachExample.Controllers
 
             if (ViewBag.SortColumn == "ProductID")
             {
-                products = ViewBag.IconClass == "fa-sort-asc" 
-                    ? products.OrderBy(temp => temp.ProductID).ToList() 
+                products = ViewBag.IconClass == "fa-sort-asc"
+                    ? products.OrderBy(temp => temp.ProductID).ToList()
                     : products.OrderByDescending(temp => temp.ProductID).ToList();
             }
 
             else if (ViewBag.SortColumn == "ProductName")
             {
-                products = ViewBag.IconClass == "fa-sort-asc" 
-                    ? products.OrderBy(temp => temp.ProductName).ToList() 
+                products = ViewBag.IconClass == "fa-sort-asc"
+                    ? products.OrderBy(temp => temp.ProductName).ToList()
                     : products.OrderByDescending(temp => temp.ProductName).ToList();
             }
 
             else if (ViewBag.SortColumn == "Price")
             {
-                products = ViewBag.IconClass == "fa-sort-asc" 
-                    ? products.OrderBy(temp => temp.Price).ToList() 
+                products = ViewBag.IconClass == "fa-sort-asc"
+                    ? products.OrderBy(temp => temp.Price).ToList()
                     : products.OrderByDescending(temp => temp.Price).ToList();
             }
 
@@ -90,7 +90,7 @@ namespace EFDbFirstApproachExample.Controllers
 
             //this is the way showed by the instructor.
             var product = db.Products.Where(temp => temp.ProductID == id).FirstOrDefault();
-            
+
             //More practical retrieve of data
             //var product = db.Products.FirstOrDefault(temp => temp.ProductID == id);
 
@@ -127,7 +127,7 @@ namespace EFDbFirstApproachExample.Controllers
                 var base64String = Convert.ToBase64String(imgBytes, 0, imgBytes.Length);
                 product.Photo = base64String;
             }
-            
+
 
             db.Products.Add(product);
             db.SaveChanges();
@@ -166,7 +166,7 @@ namespace EFDbFirstApproachExample.Controllers
             existingProduct.BrandID = product.BrandID;
             existingProduct.CategoryID = product.CategoryID;
             existingProduct.Active = product.Active;
-            
+
             db.SaveChanges();
 
             return RedirectToAction("Index");
@@ -193,7 +193,5 @@ namespace EFDbFirstApproachExample.Controllers
 
             return RedirectToAction("Index", "Products");
         }
-
-
     }
 }

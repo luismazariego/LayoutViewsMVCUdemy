@@ -2,12 +2,12 @@
 @using EFDbFirstApproachExample.HtmlHelpers;
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayoutPage1.cshtml";
 }
 
 <h2>Create Product</h2>
 
-@using (Html.BeginForm("Create", "Products", FormMethod.Post, new {enctype = "multipart/form-data"}))
+@using (Html.BeginForm("Create", "Products", new {area = "Admin"}, FormMethod.Post, new {enctype = "multipart/form-data"}))
 {
     <div class="form-row">
         <div class="form-group col-md-6">
@@ -69,7 +69,7 @@
     </div>
     @Html.ValidationSummary()
     <button type="submit" class="btn btn-success">Create</button>
-    @Html.ActionLink("Cancel", "Index", new {controller="Products"}, new { @class = "btn btn-danger" })
+    @Html.ActionLink("Cancel", "Index", new {controller="Products", area = "Admin"}, new { @class = "btn btn-danger" })
     
 }
 

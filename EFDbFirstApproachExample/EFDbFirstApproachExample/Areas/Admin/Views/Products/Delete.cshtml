@@ -1,12 +1,12 @@
 ﻿@model EFDbFirstApproachExample.Models.Product
 @{
     ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayoutPage1.cshtml";
 }
 
 <h2>Delete Product</h2>
 
-<form action="/products/delete/@Model.ProductID" method="post">
+<form action="/admin/products/delete/@Model.ProductID" method="post">
     <table class="table">
         <tr>
             <td>
@@ -29,5 +29,5 @@
     
     <div>Are you sure to delete this product?</div>
     <button type="submit" class="btn btn-danger">Delete</button>
-    <a href="/products/index" class="btn btn-danger">Cancel</a>
+    <a href="/admin/products/index" class="btn btn-danger">Cancel</a>
 </form>

@@ -82,6 +82,12 @@ namespace EFDbFirstApproachExample.Controllers
                 var authenticationManager = HttpContext.GetOwinContext().Authentication;
                 var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
                 authenticationManager.SignIn(new AuthenticationProperties(), userIdentity);
+
+                if (User.IsInRole("Admin"))
+                {
+
+                }
+
                 return RedirectToAction("Index", "Home");
             }
 
